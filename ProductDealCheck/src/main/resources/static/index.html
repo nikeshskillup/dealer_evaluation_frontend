@@ -6,8 +6,8 @@
 }
   </style>
   <script>
-    let produrl = "https://prodlist.1qwjcpow8hl6.us-south.codeengine.appdomain.cloud/"
-    let dealerurl = "https://dealerdetails11.1qwjcpow8hl6.us-south.codeengine.appdomain.cloud/"
+    let produrl = "https://nikeshkr-5000.theiadockernext-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/api/"
+    let dealerurl = "https://nikeshkr-8080.theiadockernext-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/api/"
 
     axios.get(produrl+"products").then(res=>{
       let selEl = document.createElement("select");
@@ -17,8 +17,9 @@
       defaultOpt.setAttribute('value',"--SELECT--");
       defaultOpt.innerText = "--SELECT--";
       selEl.appendChild(defaultOpt);
+    
 
-      res.data.products.forEach(element => {
+      res.data.forEach(element => {
         let optEl = document.createElement("option");
         optEl.setAttribute('value',element);
         optEl.innerText = element;
@@ -41,7 +42,7 @@
         defaultOpt.setAttribute('value',"--SELECT--");
         defaultOpt.innerText = "--SELECT--";
         selEl.appendChild(defaultOpt);
-        res.data.dealers.forEach((element)=>{
+        res.data.forEach((element)=>{
           let optEl = document.createElement("option");
           optEl.setAttribute('value',element);
           optEl.innerText = element;
@@ -74,7 +75,7 @@
         axios.get(dealerurl+"allprice/"+prodvalToFetch).then(res=>{
           let table = document.createElement("table")
 
-          res.data.prices.forEach((price)=>{
+          res.data.forEach((price)=>{
             let tr = document.createElement("tr")
             tr.innerHTML = "<td>"+price.key + "</td><td>"+price.value + "</td>";
             table.appendChild(tr);

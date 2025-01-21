@@ -18,7 +18,8 @@ public class ProductDealCheckController {
 
     @Value("${products.json.path}")
     private String productsJsonPath;
-
+    
+    
     @GetMapping("/products")
     public ResponseEntity<Map<String, List<Map<String, Object>>>> getProducts() throws IOException {
         ObjectMapper mapper = new ObjectMapper();
@@ -28,6 +29,7 @@ public class ProductDealCheckController {
         );
         return ResponseEntity.ok(products);
     }
+    
 
     @GetMapping("/getdealers/{product}")
     public ResponseEntity<List<String>> getDealers(@PathVariable String product) throws IOException {

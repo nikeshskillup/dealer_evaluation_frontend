@@ -30,4 +30,3 @@ EXPOSE 5001
  
 # Command to run the application
 CMD ["java", "-jar", "/app/ProductDealCheck-0.0.1-SNAPSHOT.war"]
- 
