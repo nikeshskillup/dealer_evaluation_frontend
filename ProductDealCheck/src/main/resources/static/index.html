@@ -6,8 +6,8 @@
 }
   </style>
   <script>
-    let produrl = "https://nikeshkr-5000.theiadockernext-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/api/"
-    let dealerurl = "https://nikeshkr-8080.theiadockernext-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/api/"
+    let produrl = "https://prodlist1.1qxo3soxvklm.us-south.codeengine.appdomain.cloud/api/"
+    let dealerurl = "https://dealerdetails1.1qxo3soxvklm.us-south.codeengine.appdomain.cloud/api/"
 
     axios.get(produrl+"products").then(res=>{
       let selEl = document.createElement("select");
@@ -74,10 +74,10 @@
       } else {
         axios.get(dealerurl+"allprice/"+prodvalToFetch).then(res=>{
           let table = document.createElement("table")
-
-          res.data.forEach((price)=>{
+console.log("res data:", res.data)
+          res.data.prices.forEach((price)=>{
             let tr = document.createElement("tr")
-            tr.innerHTML = "<td>"+price.key + "</td><td>"+price.value + "</td>";
+            tr.innerHTML = "<td>"+price.Dealer + "</td><td>"+price.Price + "</td>";
             table.appendChild(tr);
           });
 
