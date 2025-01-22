@@ -6,10 +6,10 @@
 }
   </style>
   <script>
-    let produrl = "http://localhost:5000/"
-    let dealerurl = "http://localhost:8080/"
+    let produrl = "http://localhost:5000"
+    let dealerurl = "http://localhost:8080"
 
-    axios.get(produrl+"products").then(res=>{
+    axios.get(produrl+"/api/products").then(res=>{
       let selEl = document.createElement("select");
       selEl.setAttribute("id","selProd")
       selEl.setAttribute("onChange","getDealers()")
@@ -17,8 +17,9 @@
       defaultOpt.setAttribute('value',"--SELECT--");
       defaultOpt.innerText = "--SELECT--";
       selEl.appendChild(defaultOpt);
+    
 
-      res.data.products.forEach(element => {
+      res.data.forEach(element => {
         let optEl = document.createElement("option");
         optEl.setAttribute('value',element);
         optEl.innerText = element;
@@ -33,7 +34,7 @@
       let valToFetch = document.getElementById("selProd").value;
 
       if(valToFetch != "--SELECT--") {
-        axios.get(produrl+"getdealers/"+valToFetch).then(res=>{
+        axios.get(produrl+"/api/getdealers/"+valToFetch).then(res=>{
         let selEl = document.createElement("select");
         selEl.setAttribute("id","selDealer")
         selEl.setAttribute("onChange","getDealerProductPrice()")
@@ -41,7 +42,7 @@
         defaultOpt.setAttribute('value',"--SELECT--");
         defaultOpt.innerText = "--SELECT--";
         selEl.appendChild(defaultOpt);
-        res.data.dealers.forEach((element)=>{
+        res.data.forEach((element)=>{
           let optEl = document.createElement("option");
           optEl.setAttribute('value',element);
           optEl.innerText = element;
@@ -67,16 +68,15 @@
       pricingEl.childNodes.forEach(node=>pricingEl.removeChild(node));
 
       if (dealervalToFetch != 'All Dealers') {
-        axios.get(dealerurl+"price/"+dealervalToFetch+"/"+prodvalToFetch).then(res=>{
+        axios.get(dealerurl+"/api/price/"+dealervalToFetch+"/"+prodvalToFetch).then(res=>{
           document.getElementById("pricing").innerText = res.data.message;
         })
       } else {
-        axios.get(dealerurl+"allprice/"+prodvalToFetch).then(res=>{
+        axios.get(dealerurl+"/api/allprice/"+prodvalToFetch).then(res=>{
           let table = document.createElement("table")
-
           res.data.prices.forEach((price)=>{
             let tr = document.createElement("tr")
-            tr.innerHTML = "<td>"+price.key + "</td><td>"+price.value + "</td>";
+            tr.innerHTML = "<td>"+price.Dealer + "</td><td>"+price.Price + "</td>";
             table.appendChild(tr);
           });
 
